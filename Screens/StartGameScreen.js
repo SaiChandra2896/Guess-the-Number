@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, TextInput, Button } from 'react-native';
 const StartGameScreen = props => {
   return (
     <View style={styles.screen}>
-      <Text>Start a New Game!</Text>
+      <Text style={styles.title}>Start a New Game!</Text>
       <View style={styles.imputContainer}>
         <Text>Select a Number</Text>
         <TextInput />
@@ -30,7 +30,20 @@ const styles = StyleSheet.create({
   imputContainer: {
     width: 300,
     maxWidth: '80%',
-    alignItems: 'center'
+    alignItems: 'center',
+    shadowColor: 'black',
+    //shadow properties only work on ios
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowRadius: 6,
+    shadowOpacity: 0.26,
+    //elevation works only on android to create a card like container
+    elevation: 6,
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10
   },
   buttonContainer: {
     flexDirection: 'row',
