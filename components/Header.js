@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
   title: {
     color: 'black',
     fontSize: 18,
-    marginTop: 30
+    marginTop: 30,
+    fontFamily: 'open-sans-bold'
   }
 });
 
