@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1, //to set scrollview to scroll not scrolling by default
-    width: '80%'
+    width: Dimensions.get('window').width > 350 ? '60%' : '80%'
   },
   list: {
     alignItems: 'center'
