@@ -4,9 +4,9 @@ import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 
 import Header from './components/Header';
-import StartGameScreen from './Screens/StartGameScreen';
-import GameScreen from './Screens/Gamescreen';
-import GameOverScreen from './Screens/GameOver';
+import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
+import GameOverScreen from './screens/GameOverScreen';
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -37,17 +37,17 @@ export default function App() {
 
   const startGameHandler = selectedNumber => {
     setUserNumber(selectedNumber);
-    setGuessRounds(0);
   };
 
-  const GameOverHandler = numRounds => {
-    setGuessRounds(numRounds);
+  const gameOverHandler = numOfRounds => {
+    setGuessRounds(numOfRounds);
   };
 
   let content = <StartGameScreen onStartGame={startGameHandler} />;
+
   if (userNumber && guessRounds <= 0) {
     content = (
-      <GameScreen userChoice={userNumber} onGameOver={GameOverHandler} />
+      <GameScreen userChoice={userNumber} onGameOver={gameOverHandler} />
     );
   } else if (guessRounds > 0) {
     content = (
@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <Header title='Guess a Number' />
+      <Header title="Guess a Number" />
       {content}
     </View>
   );

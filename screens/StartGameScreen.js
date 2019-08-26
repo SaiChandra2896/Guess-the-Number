@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
   View,
-  StyleSheet,
   Text,
+  StyleSheet,
   Button,
   TouchableWithoutFeedback,
   Keyboard,
@@ -10,12 +10,11 @@ import {
 } from 'react-native';
 
 import Card from '../components/Card';
-import Input from '../components/input';
+import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 import BodyText from '../components/BodyText';
 import TitleText from '../components/TitleText';
 import MainButton from '../components/MainButton';
-
 import Colors from '../constants/colors';
 
 const StartGameScreen = props => {
@@ -23,9 +22,8 @@ const StartGameScreen = props => {
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
 
-  const numberInputHandler = input => {
-    //validation to enter only numbers
-    setEnteredValue(input.replace(/[^0-9]/g, ''));
+  const numberInputHandler = inputText => {
+    setEnteredValue(inputText.replace(/[^0-9]/g, ''));
   };
 
   const resetInputHandler = () => {
@@ -36,9 +34,11 @@ const StartGameScreen = props => {
   const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue);
     if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
-      Alert.alert('Invalid number!', 'Number has to be between 1 and 99', [
-        { text: 'Ok', style: 'destructive', onPress: resetInputHandler }
-      ]);
+      Alert.alert(
+        'Invalid number!',
+        'Number has to be a number between 1 and 99.',
+        [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
+      );
       return;
     }
     setConfirmed(true);
@@ -47,20 +47,22 @@ const StartGameScreen = props => {
     Keyboard.dismiss();
   };
 
-  let output;
+  let confirmedOutput;
+
   if (confirmed) {
-    output = (
+    confirmedOutput = (
       <Card style={styles.summaryContainer}>
-        <BodyText>You Selected</BodyText>
+        <BodyText>You selected</BodyText>
         <NumberContainer>{selectedNumber}</NumberContainer>
-        <MainButton onPress={props.onStartGame}>START GAME</MainButton>
+        <MainButton onPress={() => props.onStartGame(selectedNumber)}>
+          START GAME
+        </MainButton>
       </Card>
     );
   }
 
   return (
     <TouchableWithoutFeedback
-      //to remove key board on touch outside
       onPress={() => {
         Keyboard.dismiss();
       }}
@@ -70,11 +72,11 @@ const StartGameScreen = props => {
         <Card style={styles.inputContainer}>
           <BodyText>Select a Number</BodyText>
           <Input
-            style={styles.Input}
+            style={styles.input}
             blurOnSubmit
-            autoCapitalize='none'
+            autoCapitalize="none"
             autoCorrect={false}
-            keyboardType='number-pad'
+            keyboardType="number-pad"
             maxLength={2}
             onChangeText={numberInputHandler}
             value={enteredValue}
@@ -82,21 +84,21 @@ const StartGameScreen = props => {
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <Button
-                title='Reset'
-                color={Colors.accent}
+                title="Reset"
                 onPress={resetInputHandler}
+                color={Colors.accent}
               />
             </View>
             <View style={styles.button}>
               <Button
-                title='Confirm'
-                color={Colors.primary}
+                title="Confirm"
                 onPress={confirmInputHandler}
+                color={Colors.primary}
               />
             </View>
           </View>
         </Card>
-        {output}
+        {confirmedOutput}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
   button: {
     width: 100
   },
-  Input: {
+  input: {
     width: 50,
     textAlign: 'center'
   },
