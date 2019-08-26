@@ -117,12 +117,14 @@ const styles = StyleSheet.create({
     width: '60%'
   },
   listContainer: {
-    flex: 1, //to set scrollview to scroll
+    flex: 1, //to set scrollview to scroll not scrolling by default
     width: '80%'
   },
   list: {
     alignItems: 'center'
   }
 });
+
+//if we want to add list items from bottom we can add justify content : flex-end and flexgrow: 1
 
 export default GameScreen;
